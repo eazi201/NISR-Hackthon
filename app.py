@@ -63,7 +63,7 @@ if st.button("Predict Growth Rate"):
                   markers=True)
     st.plotly_chart(fig)
   
-    if prediction[0] > 3.0:  
+    if prediction[0] > 4.0:  
         st.success(f"Recommendation: {field} in {industry} shows promising growth for {year}. Investing here could yield positive results.")
     else:
         st.info(f"Recommendation: Growth for {field} in {industry} is moderate. Explore strategies to improve growth.")
