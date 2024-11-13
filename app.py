@@ -13,19 +13,19 @@ st.write("""
 This dashboard predicts growth rates for industries and recommends skills in high demand for the selected industry.
 """)
 
-# Single Industry Selection
+
 st.header("Industry Selection")
-industry = st.selectbox("Select Industry", skills_data['Industry'].unique())
+industry = st.selectbox("Select Industry", skills_data['industry'].unique())
 field = st.text_input("Enter Specific Field (Optional)")
 
-# Growth Rate Prediction Section
+
 st.header("Growth Rate Prediction")
 year = st.selectbox("Select Year", [2025, 2026, 2027])
 gdp_growth = st.slider("GDP Growth (%)", -10.0, 10.0, 2.5)
 inflation_rate = st.slider("Inflation Rate (%)", 0.0, 20.0, 3.0)
 unemployment_rate = st.slider("Unemployment Rate (%)", 0.0, 25.0, 5.0)
 
-# Default values for prediction
+
 default_values = {
     'industry': industry,
     'field': field,
@@ -78,14 +78,14 @@ if st.button("Predict Growth Rate"):
     else:
         st.info(f"Recommendation: Growth for {field} in {industry} is moderate. Explore strategies to improve growth.")
 
-# Skill Demand Recommendation Section
+
 st.header("Skill Demand Recommendations")
 st.write("""
 Based on the selected industry, here are skills currently in high demand, along with their peak periods and details.
 """)
 
-# Filter data based on the selected industry
-filtered_data = skills_data[skills_data['Industry'] == industry]
+
+filtered_data = skills_data[skills_data['industry'] == industry]
 
 if field:
     filtered_data = filtered_data[filtered_data['Skill'].str.contains(field, case=False, na=False)]
@@ -94,7 +94,7 @@ if not filtered_data.empty:
     st.subheader(f"Recommended Skills in {industry}")
     st.write(filtered_data[['Skill', 'Demand_Level', 'Peak_Period', 'Details']])
 
-    # Leaderboard Visualization
+  
     st.subheader("Skill Demand Leaderboard")
     demand_levels = {"Very High": 3, "High": 2, "Medium": 1}
     filtered_data['Demand_Score'] = filtered_data['Demand_Level'].map(demand_levels)
